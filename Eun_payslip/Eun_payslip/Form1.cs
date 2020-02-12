@@ -19,6 +19,9 @@ namespace Eun_payslip
         String _User_list_File; //유저정보갖고있는 File의 주소저장
         List<string> _All_file = new List<string>(); //모든 선택된 파일의 경로를 갖고있다. 
 
+        Dictionary<String, String> _User_Price = new Dictionary<string, string>(); //본인부담금 정보
+        Dictionary<String, Info_data> _Result_Data = new Dictionary<string, Info_data>(); //장기요양 인정번호, 영수증번호, 급여 정보
+
 
 
         public Form1()
@@ -29,7 +32,7 @@ namespace Eun_payslip
         /// <summary>
         /// 파일선택시 해당 파일의 수급자, 본인부담금데이터를 가져와 ListView에 뿌려준다.
         /// </summary>
-       
+
 
         /// <summary>
         /// 저장된 File_Path 주소를 List에 뿌려준다.
@@ -100,6 +103,7 @@ namespace Eun_payslip
                 arr[1] = ofdFile2.FileNames[i].ToString(); //File 경로 저장
                 itm = new ListViewItem(arr);
                 listView2.Items.Add(itm);
+
             }
             listView2.Columns[1].Width = -1; //컬럼크기를 텍스트 크기에 맞춰 정렬
             listView2.Columns[1].Width = -2; //컬럼크기를 텍스트 크기에 맞춰 정렬
@@ -114,8 +118,7 @@ namespace Eun_payslip
             app.Visible = false;
             Excel.Range range = worksheet1.UsedRange; //사용된 Range를 가져온다. Row와 Column의 정보를 갖고있다. 
 
-
-            String data = "";
+            
 
             //그리드에 정보를 담는다.
             string[] arr = new string[3];
@@ -123,8 +126,8 @@ namespace Eun_payslip
 
             for (int j = 10; j <= range.Rows.Count; j++)
             {
-                String data_Result = (range.Cells[j, 2] as Excel.Range).Value2.ToString(); //null값이면 빠져나오기 위해
-                if (data_Result != null)
+                //String data_Result = (range.Cells[j, 2] as Excel.Range).Value2.ToString(); //null값이면 빠져나오기 위해
+                if ((string)(range.Cells[j, 2] as Excel.Range).Text.ToString() != "")
                 {
                     //data += ((range.Cells[j, 2] as Excel.Range).Value2.ToString() + " ");
                     arr[0] = (j - 9).ToString(); //No.
@@ -132,6 +135,7 @@ namespace Eun_payslip
                     arr[2] = ((range.Cells[j, 8] as Excel.Range).Value2.ToString() + " "); //금액 컬럼 열 변경시 바꿔줘야한다.
                     itm = new ListViewItem(arr);
                     listView1.Items.Add(itm);
+                    _User_Price.Add(arr[1], arr[2]);
                 }
             }
             lblperiod.Text = (range.Cells[3, 5] as Excel.Range).Value2.ToString(); //급여제공기간
@@ -148,82 +152,46 @@ namespace Eun_payslip
         /// </summary>
         private void Excel_Detail_Info_Read()
         {
-            try
+            
+
+            
+
+            
+            //for 문으로 리스트 크기만금 돌려서 모두 출력
+            for(int i= 0; i < _All_file.Count; i++)
             {
                 Excel.Application app = new Excel.Application();
-
-                /*
-                //for 문으로 리스트 크기만금 돌려서 모두 출력
-                for(int i= 0; i < _All_file.Count; i++)
-                {
-                    MessageBox.Show("실행완료" + i);
-                }
-                */
-
-
-                Excel.Workbook workbook = app.Workbooks.Open(Filename: _All_file[0]);
+                Excel.Workbook workbook = app.Workbooks.Open(Filename: _All_file[i]);
                 Excel.Worksheet worksheet1 = workbook.Worksheets.Item[1]; //Index는 1부터 시작한다.
                 app.Visible = false;
                 Excel.Range range = worksheet1.UsedRange; //사용된 Range를 가져온다. Row와 Column의 정보를 갖고있다. 
-                String data = "";
-
-                data += ((range.Cells[7, 2] as Excel.Range).Value2.ToString() + " "); //이름
-                data += ((range.Cells[7, 16] as Excel.Range).Value2.ToString() + " "); //장기요양 인정번호
-
-                MessageBox.Show((string)(range.Cells[26, 28] as Excel.Range).Text.ToString());
+                String Name = "";
+                String Identify_No = "";
+                String Price = "";
+                Name = ((range.Cells[7, 2] as Excel.Range).Value2.ToString() + " "); //이름
+                Identify_No = ((range.Cells[7, 16] as Excel.Range).Value2.ToString() + " "); //장기요양 인정번호
 
                 for (int j = 21; j < range.Rows.Count; j++) //21은 시작하는열
                 {
-                    //String data_Result = (range.Cells[j, 28] as Excel.Range).Value2.ToString(); //null값이면 빠져나오기 위해
-
-                    // range.Cells[26, 28] as Excel.Range).Value2
-
-
-                    if ((range.Cells[j, 28] as Excel.Range).Value2 != "")
+                    if ((string)(range.Cells[j, 28] as Excel.Range).Text.ToString() != "")
                     {
-                        int jjjj = 0;
-                        data += ((range.Cells[j, 28] as Excel.Range).Value2.ToString() + " ");
+                        Price = ((range.Cells[j, 28] as Excel.Range).Value2.ToString() + " "); //마지막으로 입력된 값만 넣어준다. 나머지는 필요없음
                     }
-
-                    int gg = 0;
                 }
-                //richTextBox1.Text = data;
+
+                Info_data info_data = new Info_data();
+                info_data.Identify_No = Identify_No;
+                info_data.Price = Price;
+
+                _Result_Data.Add(Name, info_data);
 
                 DeleteObject(worksheet1);
                 DeleteObject(workbook);
                 app.Quit();
                 DeleteObject(app);
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
-            finally
-            {
 
-            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         /// <summary>
@@ -253,5 +221,25 @@ namespace Eun_payslip
         {
             Excel_Detail_Info_Read();
         }
+
+        /// <summary>
+        /// 파일생성 클릭이 저장된 모든 데이터를 읽어서뿌려준다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            //_User_Price
+            foreach(KeyValuePair<String, Info_data> temp in _Result_Data)
+            {
+                Console.WriteLine("출력테스트 : 이름 = {0}, 인정번호 = {1}, 금액 = {2}", temp.Key, temp.Value.Identify_No, temp.Value.Price);
+            }
+        }
     }
+    class Info_data
+    {
+        public String Identify_No { get; set; }
+        public String Price { get; set; }
+    }
+
 }

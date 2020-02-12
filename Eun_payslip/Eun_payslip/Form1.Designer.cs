@@ -36,7 +36,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblperiod = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -47,9 +50,7 @@
             this.listView2 = new System.Windows.Forms.ListView();
             this.ofdFile = new System.Windows.Forms.OpenFileDialog();
             this.ofdFile2 = new System.Windows.Forms.OpenFileDialog();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblperiod = new System.Windows.Forms.Label();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -134,14 +135,44 @@
             this.panel3.Size = new System.Drawing.Size(825, 112);
             this.panel3.TabIndex = 0;
             // 
+            // lblperiod
+            // 
+            this.lblperiod.AutoSize = true;
+            this.lblperiod.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblperiod.Location = new System.Drawing.Point(143, 8);
+            this.lblperiod.Name = "lblperiod";
+            this.lblperiod.Size = new System.Drawing.Size(74, 25);
+            this.lblperiod.TabIndex = 9;
+            this.lblperiod.Text = "기간txt";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(11, 8);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(137, 25);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "급여제공기간 : ";
+            // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.simpleButton2);
             this.panel4.Controls.Add(this.simpleButton1);
             this.panel4.Location = new System.Drawing.Point(351, 131);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(460, 325);
             this.panel4.TabIndex = 2;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(26, 250);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(132, 54);
+            this.simpleButton1.TabIndex = 8;
+            this.simpleButton1.Text = "실행";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // label1
             // 
@@ -234,34 +265,14 @@
             this.ofdFile2.Multiselect = true;
             this.ofdFile2.FileOk += new System.ComponentModel.CancelEventHandler(this.ofdFile2_FileOk);
             // 
-            // simpleButton1
+            // simpleButton2
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(306, 248);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(132, 54);
-            this.simpleButton1.TabIndex = 8;
-            this.simpleButton1.Text = "실행";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(11, 8);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(137, 25);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "급여제공기간 : ";
-            // 
-            // lblperiod
-            // 
-            this.lblperiod.AutoSize = true;
-            this.lblperiod.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblperiod.Location = new System.Drawing.Point(143, 8);
-            this.lblperiod.Name = "lblperiod";
-            this.lblperiod.Size = new System.Drawing.Size(74, 25);
-            this.lblperiod.TabIndex = 9;
-            this.lblperiod.Text = "기간txt";
+            this.simpleButton2.Location = new System.Drawing.Point(307, 250);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(132, 54);
+            this.simpleButton2.TabIndex = 9;
+            this.simpleButton2.Text = "파일생성실행";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // Form1
             // 
@@ -315,6 +326,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private System.Windows.Forms.Label lblperiod;
         private System.Windows.Forms.Label label6;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
     }
 }
 
