@@ -45,3 +45,8 @@ C:\CSharpProject\eun_project\Eun_payslip\Eun_payslip\bin\Debug\de\DevExpress.Pdf
 C:\CSharpProject\eun_project\Eun_payslip\Eun_payslip\bin\Debug\es\DevExpress.Pdf.v19.2.Core.resources.dll
 C:\CSharpProject\eun_project\Eun_payslip\Eun_payslip\bin\Debug\ja\DevExpress.Pdf.v19.2.Core.resources.dll
 C:\CSharpProject\eun_project\Eun_payslip\Eun_payslip\bin\Debug\ru\DevExpress.Pdf.v19.2.Core.resources.dll
+C:\CSharpProject\eun_project\Eun_payslip\Eun_payslip\obj\Debug\Eun_payslip.HelpForm.resources
+C:\CSharpProject\eun_project\Eun_payslip\Eun_payslip\bin\Debug\Eun_payslip.exe.manifest
+C:\CSharpProject\eun_project\Eun_payslip\Eun_payslip\bin\Debug\Eun_payslip.application
+C:\CSharpProject\eun_project\Eun_payslip\Eun_payslip\obj\Debug\Eun_payslip.exe.manifest
+C:\CSharpProject\eun_project\Eun_payslip\Eun_payslip\obj\Debug\Eun_payslip.application
